@@ -92,8 +92,6 @@ DCI.interPolate = {
 		        legendDiv.className = "map-legend1";                   
                 document.getElementById("map").appendChild(legendDiv);
                 
-
-
                 var _map_clock = "map_clock";
                 clock = document.createElement("div");
                 clock.id = _map_clock;
