@@ -79,7 +79,7 @@ MapConfig.sliderConfig = {
 /*地图调用*/
 //MapConfig.onlineMapUrl = "http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineCommunity/MapServer";//ArcGIS在线地图服务
 MapConfig.onlineMapUrl = "http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer";//ArcGIS在线地图服务
-MapConfig.searchMapUrl = "http://192.168.1.55:6080/arcgis/rest/services/pipe/MapServer";//城建坐标地图服务
+MapConfig.searchMapUrl = "http://192.168.1.55:6080/arcgis/rest/services/20180411/MapServer";//城建坐标地图服务
 MapConfig.locatorUrl = "http://localhost:6080/arcgis/rest/services/dlLocator/GeocodeServer";//地理编码服务
 MapConfig.routetaskUrl = "http://localhost:6080/arcgis/rest/services/dlroad/NAServer/Route";//路网服务
 MapConfig.routeUrl = "http://localhost:6080/arcgis/rest/services/dlClosestFacility/NAServer/Closest%20Facility";//Closest Facility服务
@@ -92,7 +92,7 @@ MapConfig.pipepngUrl = "http://192.168.1.55/pipepress/raster/output/";
 MapConfig.arcvecMap = { Url: "http://192.168.1.55:6080/arcgis/rest/services/jcsj/MapServer", labelUrl: "矢量", type: 1 };//上海矢量底图服务-ArcGIS切片格式
 MapConfig.arcimgMap = { Url: "http://localhost:6080/arcgis/rest/services/dlImgMap/MapServer", labelUrl: "影像", type: 1 };//上海影像底图服务-ArcGIS切片格式
 /*图层目录构造*/
-MapConfig.zNodes = [
+/* MapConfig.zNodes = [
     { id: 1, pId: 0, name: "设施", checked: false, iconOpen: "" + getRootPath() + "Content/images/legend/1_open.png", iconClose: "" + getRootPath() + "Content/images/legend/1_close.png" },
     { id: 11, pId: 1, name: "调压器纠正", layerurl: MapConfig.searchMapUrl, layerid: "layer0", checked: false, icon: "" + getRootPath() + "Content/images/legend/0.png" },
     { id: 12, pId: 1, name: "中压节点", layerurl: MapConfig.searchMapUrl, layerid: "layer1", checked: false, icon: "" + getRootPath() + "Content/images/legend/1.png" },
@@ -105,6 +105,28 @@ MapConfig.zNodes = [
     { id: 22, pId: 2, name: "高压管线", layerurl: MapConfig.searchMapUrl, layerid: "layer6", checked: false, icon: "" + getRootPath() + "Content/images/legend/gy.png" },
     { id: 3, pId: 0, name: "面图层", checked: false, iconOpen: "" + getRootPath() + "Content/images/legend/1_open.png", iconClose: "" + getRootPath() + "Content/images/legend/1_close.png" },
     { id: 31, pId: 3, name: "嘉定", layerurl: MapConfig.searchMapUrl, layerid: "layer8", checked: false }
+]; */
+MapConfig.zNodes = [
+    { id: 1, pId: 0, name: "点图层", checked: false, iconOpen: "" + getRootPath() + "Content/images/legend/1_open.png", iconClose: "" + getRootPath() + "Content/images/legend/1_close.png" },
+    { id: 11, pId: 1, name: "民丰绿苑大众", layerurl: MapConfig.searchMapUrl, layerid: "layer0", checked: false, icon: "" + getRootPath() + "Content/images/legend/0.png" },
+    { id: 12, pId: 1, name: "五金百安上外", layerurl: MapConfig.searchMapUrl, layerid: "layer1", checked: false, icon: "" + getRootPath() + "Content/images/legend/1.png" },
+    { id: 13, pId: 1, name: "宝钱永盛", layerurl: MapConfig.searchMapUrl, layerid: "layer2", checked: false, icon: "" + getRootPath() + "Content/images/legend/2.png" },
+    { id: 14, pId: 1, name: "调压器_250kpa", layerurl: MapConfig.searchMapUrl, layerid: "layer3", checked: false, icon: "" + getRootPath() + "Content/images/legend/3.png" },
+    { id: 15, pId: 1, name: "门站", layerurl: MapConfig.searchMapUrl, layerid: "layer4", checked: false, icon: "" + getRootPath() + "Content/images/legend/4.png" },
+    { id: 16, pId: 1, name: "高压节点", layerurl: MapConfig.searchMapUrl, layerid: "layer5", checked: false },
+    { id: 17, pId: 1, name: "中压节点", layerurl: MapConfig.searchMapUrl, layerid: "layer6", checked: false },
+    { id: 2, pId: 0, name: "管线图层", checked: false, iconOpen: "" + getRootPath() + "Content/images/legend/1_open.png", iconClose: "" + getRootPath() + "Content/images/legend/1_close.png" },
+    { id: 21, pId: 2, name: "民丰绿苑大众管线", layerurl: MapConfig.searchMapUrl, layerid: "layer7", checked: false, icon: "" + getRootPath() + "Content/images/legend/zy.png" },
+    { id: 22, pId: 2, name: "五金百安上外管线", layerurl: MapConfig.searchMapUrl, layerid: "layer8", checked: false, icon: "" + getRootPath() + "Content/images/legend/gy.png" },   
+    { id: 23, pId: 2, name: "宝钱永盛管线", layerurl: MapConfig.searchMapUrl, layerid: "layer9", checked: false, icon: "" + getRootPath() + "Content/images/legend/gy.png" },
+    { id: 24, pId: 2, name: "高压管线", layerurl: MapConfig.searchMapUrl, layerid: "layer10", checked: false, icon: "" + getRootPath() + "Content/images/legend/gy.png" },
+    { id: 24, pId: 2, name: "中压管线", layerurl: MapConfig.searchMapUrl, layerid: "layer11", checked: false, icon: "" + getRootPath() + "Content/images/legend/gy.png" },
+    { id: 3, pId: 0, name: "面图层", checked: false, iconOpen: "" + getRootPath() + "Content/images/legend/1_open.png", iconClose: "" + getRootPath() + "Content/images/legend/1_close.png" },
+    { id: 31, pId: 3, name: "民丰绿苑大众缓冲区", layerurl: MapConfig.searchMapUrl, layerid: "layer12", checked: false },
+    { id: 32, pId: 3, name: "宝钱永盛", layerurl: MapConfig.searchMapUrl, layerid: "layer13", checked: false },
+    { id: 33, pId: 3, name: "五金百安上外", layerurl: MapConfig.searchMapUrl, layerid: "layer14", checked: false },
+    { id: 34, pId: 3, name: "绿环", layerurl: MapConfig.searchMapUrl, layerid: "layer15", checked: false },
+    { id: 35, pId: 3, name: "民丰绿苑大众", layerurl: MapConfig.searchMapUrl, layerid: "layer16", checked: false }
 ];
 MapConfig.dredicturl = "http://120.26.105.20:8099/predict/";//预测结果服务
 MapConfig.printGPURL = "http://localhost:6080/arcgis/rest/services/ExportWebMap/GPServer/Export%20Web%20Map";//打印GP服务
