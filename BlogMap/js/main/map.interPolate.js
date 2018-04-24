@@ -96,7 +96,7 @@ DCI.interPolate = {
             clock = document.createElement("div");
             clock.id = _map_clock;
             clock.className = "map-clock1";
-            //  clock.backgroundImage = "../../Content/images/map/index/1.png";
+
             $("#map").append(clock);
 
         }
@@ -104,12 +104,13 @@ DCI.interPolate = {
     },
     /*隐藏图例*/
     hideLegend: function () {
-        var legendDiv = document.getElementById("map_legend");
+        var legendDiv = $("#map_legend");
         if (legendDiv) {
-            legendDiv.style.display = "none";
-
-            document.getElementById("map_clock").style.background = 'url(./Content/images/map/index/1.png)';
-            document.getElementById("map_clock").style.display = "none";
+            legendDiv.css("display","none");
+            $("#map_clock").css({
+                "background":'url(./Content/images/map/index/1.png)',
+                "display":'none'                
+            });
         }
     },
 
@@ -214,6 +215,7 @@ DCI.interPolate = {
                 });
 
                 if (p > 1) {
+                    //$("#map_clock").css("background",'url(./Content/images/map/index/' + p + '.png) no-repeat');
                     document.getElementById("map_clock").style.background = 'url(./Content/images/map/index/' + p + '.png) no-repeat';
                 }
 
