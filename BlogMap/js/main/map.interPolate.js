@@ -9,12 +9,21 @@ DCI.interPolate = {
     m: null,
     d: null,
     hou: null,
+    imgar: [],
     //模块初始化函数
     Init: function (map) {
         DCI.interPolate.map = map;
         var c = 0;
         var t;
-
+        for(i=1;i<24;i++){
+          DCI.interPolate.imgar[i] = new Image();
+          DCI.interPolate.imgar[i].src = "./Content/images/map/index/"+i+".png"; 
+/*           imgar[i].onload=function(){
+            this.width = 960;
+            this.height =380;
+           } */
+         }
+        
         //压力图模块
         $("#testLayer input").bind("click", function () {
             if (this.checked) {
@@ -31,12 +40,31 @@ DCI.interPolate = {
                     i = hour.value;
                     DCI.interPolate.oneloop();
                 }
-                DCI.interPolate.showLegend();
+                var clock = document.getElementById("map_clock");
+                if (clock) {
+                    clock.style.display = "block";
+                }
+                else {
+                    var _map_clock = "map_clock";
+                    clock = document.createElement("div");
+                    clock.id = _map_clock;
+                    clock.className = "map-clock1";
+        
+                    $("#map").append(clock);
+        
+                }
 
             }
             else {
                 DCI.interPolate.gplayer.removeAllImages();
-                DCI.interPolate.hideLegend();
+                var clockDiv = $("#map_clock");
+                if (clockDiv) {
+                    
+                    clockDiv.css({
+                        "background":'url(./Content/images/map/index/1.png)',
+                        "display":'none'                
+                    });
+                }
             }
         })
         //监听check点击事件
@@ -216,7 +244,7 @@ DCI.interPolate = {
 
                 if (p > 1) {
                     //$("#map_clock").css("background",'url(./Content/images/map/index/' + p + '.png) no-repeat');
-                    document.getElementById("map_clock").style.background = 'url(./Content/images/map/index/' + p + '.png) no-repeat';
+                    document.getElementById("map_clock").style.background = 'url("'+DCI.interPolate.imgar[p].src+'") no-repeat';
                 }
 
 
