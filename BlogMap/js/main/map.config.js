@@ -115,6 +115,7 @@ MapConfig.zNodes = [
     { id: 15, pId: 1, name: "门站", layerurl: MapConfig.searchMapUrl, layerid: "layer4", checked: false, icon: "" + getRootPath() + "Content/images/legend/4.png" },
     { id: 16, pId: 1, name: "高压节点", layerurl: MapConfig.searchMapUrl, layerid: "layer5", checked: false },
     { id: 17, pId: 1, name: "中压节点", layerurl: MapConfig.searchMapUrl, layerid: "layer6", checked: false },
+    { id: 18, pId: 1, name: "中压插值点", layerurl: MapConfig.searchMapUrl, layerid: "layer19", checked: false },
     { id: 2, pId: 0, name: "管线图层", checked: false, iconOpen: "" + getRootPath() + "Content/images/legend/1_open.png", iconClose: "" + getRootPath() + "Content/images/legend/1_close.png" },
     { id: 21, pId: 2, name: "民丰绿苑大众管线", layerurl: MapConfig.searchMapUrl, layerid: "layer7", checked: false, icon: "" + getRootPath() + "Content/images/legend/zy.png" },
     { id: 22, pId: 2, name: "五金百安上外管线", layerurl: MapConfig.searchMapUrl, layerid: "layer8", checked: false, icon: "" + getRootPath() + "Content/images/legend/gy.png" },   

@@ -190,7 +190,7 @@ DCI.interPolate = {
 
         if (k <= 23) {
             DCI.interPolate.addImageLayer('layer', MapConfig.testpngUrl + y + '/' + m + '/' + d + '/' + (Array(2).join(0) + k).slice(-2) + '/KPA/KPA.png',
-                -42676.2431603, -1075.14970539, -947.776819777, 30221.20005, 2379, 0.8, k);
+                -42676.2431603, -1075.14970539, -947.776819777, 30221.20005, 2379, 0.9, k);
         }
         else {
             alert('请输入0-23之间的时间');
