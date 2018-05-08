@@ -112,7 +112,7 @@ MapConfig.zNodes = [
     { id: 12, pId: 1, name: "五金百安上外", layerurl: MapConfig.searchMapUrl, layerid: "layer1", checked: false, icon: "" + getRootPath() + "Content/images/legend/1.png" },
     { id: 13, pId: 1, name: "宝钱永盛", layerurl: MapConfig.searchMapUrl, layerid: "layer2", checked: false, icon: "" + getRootPath() + "Content/images/legend/2.png" },
     { id: 14, pId: 1, name: "调压器_250kpa", layerurl: MapConfig.searchMapUrl, layerid: "layer3", checked: false, icon: "" + getRootPath() + "Content/images/legend/3.png" },
-    { id: 15, pId: 1, name: "门站", layerurl: MapConfig.searchMapUrl, layerid: "layer4", checked: false, icon: "" + getRootPath() + "Content/images/legend/4.png" },
+    { id: 15, pId: 1, name: "门站", layerurl: MapConfig.searchMapUrl, layerid: "layer4", checked: true, icon: "" + getRootPath() + "Content/images/legend/4.png" },
     { id: 16, pId: 1, name: "高压节点", layerurl: MapConfig.searchMapUrl, layerid: "layer5", checked: false },
     { id: 17, pId: 1, name: "中压节点", layerurl: MapConfig.searchMapUrl, layerid: "layer6", checked: false },
     { id: 18, pId: 1, name: "中压插值点", layerurl: MapConfig.searchMapUrl, layerid: "layer19", checked: false },
@@ -121,13 +121,14 @@ MapConfig.zNodes = [
     { id: 22, pId: 2, name: "五金百安上外管线", layerurl: MapConfig.searchMapUrl, layerid: "layer8", checked: false, icon: "" + getRootPath() + "Content/images/legend/gy.png" },   
     { id: 23, pId: 2, name: "宝钱永盛管线", layerurl: MapConfig.searchMapUrl, layerid: "layer9", checked: false, icon: "" + getRootPath() + "Content/images/legend/gy.png" },
     { id: 24, pId: 2, name: "高压管线", layerurl: MapConfig.searchMapUrl, layerid: "layer10", checked: false, icon: "" + getRootPath() + "Content/images/legend/gy.png" },
-    { id: 24, pId: 2, name: "中压管线", layerurl: MapConfig.searchMapUrl, layerid: "layer11", checked: false, icon: "" + getRootPath() + "Content/images/legend/gy.png" },
+    { id: 24, pId: 2, name: "中压管线", layerurl: MapConfig.searchMapUrl, layerid: "layer11", checked: true, icon: "" + getRootPath() + "Content/images/legend/gy.png" },
     { id: 3, pId: 0, name: "面图层", checked: false, iconOpen: "" + getRootPath() + "Content/images/legend/1_open.png", iconClose: "" + getRootPath() + "Content/images/legend/1_close.png" },
     { id: 31, pId: 3, name: "民丰绿苑大众缓冲区", layerurl: MapConfig.searchMapUrl, layerid: "layer12", checked: false },
     { id: 32, pId: 3, name: "宝钱永盛", layerurl: MapConfig.searchMapUrl, layerid: "layer13", checked: false },
     { id: 33, pId: 3, name: "五金百安上外", layerurl: MapConfig.searchMapUrl, layerid: "layer14", checked: false },
     { id: 34, pId: 3, name: "绿环", layerurl: MapConfig.searchMapUrl, layerid: "layer15", checked: false },
-    { id: 35, pId: 3, name: "民丰绿苑大众", layerurl: MapConfig.searchMapUrl, layerid: "layer16", checked: false }
+    { id: 35, pId: 3, name: "民丰绿苑大众", layerurl: MapConfig.searchMapUrl, layerid: "layer16", checked: false },
+    { id: 36, pId: 3, name: "嘉定", layerurl: MapConfig.searchMapUrl, layerid: "layer17", checked: true }
 ];
 MapConfig.dredicturl = "http://120.26.105.20:8099/predict/";//预测结果服务
 MapConfig.printGPURL = "http://localhost:6080/arcgis/rest/services/ExportWebMap/GPServer/Export%20Web%20Map";//打印GP服务

@@ -7,9 +7,10 @@ DCI.Catalog = {
     treeObj: null,//保留tree对象
     Init: function (map) {
         DCI.Catalog.map = map;
-        //setTimeout(function () {
-        //    DCI.Catalog.LoadAllTree(MapConfig.zNodes);
-        //}, 500);
+        var array = $.map(MapConfig.zNodes,item => { if(item.checked == true) return item; });
+        setTimeout(function () {
+            DCI.Catalog.LoadAllTree(array);
+        }, 500);
         DCI.Catalog.InitTree();
     },
     /**
