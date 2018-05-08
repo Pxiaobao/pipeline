@@ -5,41 +5,27 @@ DCI.interPolate = {
     mins: null,
     i: null,
     k: null,
-    y: null,
+    y: null,//图片的年份
     m: null,
     d: null,
     hou: null,
-    imgar: [],
+    freq: null,
+    imgar: [],//图片数组
+    times:['0000','0015','0030','0045','0100','0115','0130','0145','0200','0215','0230','0245','0300','0315','0330','0345','0400','0415','0430','0445','0500','0515','0530','0545','0600','0615','0630','0645','0700','0715','0730','0745','0800'],
     //模块初始化函数
     Init: function (map) {
         DCI.interPolate.map = map;
         var c = 0;
         var t;
+        //预加载时间图片
         for(i=1;i<24;i++){
           DCI.interPolate.imgar[i] = new Image();
           DCI.interPolate.imgar[i].src = "./Content/images/map/index/"+i+".png"; 
-/*           imgar[i].onload=function(){
-            this.width = 960;
-            this.height =380;
-           } */
          }
         
         //压力图模块
         $("#testLayer input").bind("click", function () {
             if (this.checked) {
-                var date = start.value;
-                y = date.substr(0, 4);
-                m = date.substr(5, 2);
-                d = date.substr(8, 2);
-                if (hour.value == "") {
-                    i = 0;
-                    DCI.interPolate.loops();
-                    this.disabled = "disabled";
-                }
-                else {
-                    i = hour.value;
-                    DCI.interPolate.oneloop();
-                }
                 var clock = document.getElementById("map_clock");
                 if (clock) {
                     clock.style.display = "block";
@@ -53,6 +39,25 @@ DCI.interPolate = {
                     $("#map").append(clock);
         
                 }
+                var date = start.value;
+                var hour_start = hour.value.replace(/:/,"");
+                var hour_end = hour2.value.replace(/:/,"");
+                freq = DCI.interPolate.times.indexOf(hour_end) - DCI.interPolate.times.indexOf(hour_start)
+
+                y = date.substr(0, 4);
+                m = date.substr(5, 2);
+                d = date.substr(8, 2);
+                
+                //if (hour.value == "") {
+                    i = DCI.interPolate.times.indexOf(hour_start);
+                    DCI.interPolate.loops();
+                    this.disabled = "disabled";
+                //}
+/*                 else {
+                    i = hour.value;
+                    DCI.interPolate.oneloop();
+                } */
+                
 
             }
             else {
@@ -145,8 +150,8 @@ DCI.interPolate = {
     /*管道分级图循环显示*/
     loops: function () {
 
-        if (i <= 23) {
-            DCI.interPolate.addImageLayer('layer', MapConfig.pipepngUrl + y + '/' + m + '/' + d + '/' + (Array(2).join(0) + i).slice(-2) + '/KPA/KPA.png',
+        if (i <= freq) {
+            DCI.interPolate.addImageLayer('layer', MapConfig.pipepngUrl + y + '/' + m + '/' + d + '/' + DCI.interPolate.times[i] + '/KPA/KPA.png',
             -34094.0786696, 4642.90213197, -9329.02913947, 23216.6892795, 2379, 1, i);
             i++;
             setTimeout(DCI.interPolate.loops, 1000)

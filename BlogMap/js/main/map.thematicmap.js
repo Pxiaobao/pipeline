@@ -4,14 +4,49 @@ DCI.thematicmap = {
      * 界面设计
     */
     Html:
-        
-        '<input id="start" type="date" value="2018-01-29" />'+
-        '<input id="hour" type="text"  style="width: 50px;height: 26px"/>'+
+        "<div>" +
+            "<input type='button' class='route_star' id='route1'>" +
+            '<input id="start" type="date" style="width: 130px" value="2018-02-19" />'+
+            '<input id="hour" list="times"  style="width: 45px;height: 26px"/>'+
+            '<datalist id="times">'+
+                '<option value="00:00"><option value="00:15"><option value="00:30"><option value="00:45">'+
+                '<option value="01:00"><option value="01:15"><option value="01:30"><option value="01:45">'+
+                '<option value="02:00"><option value="02:15"><option value="02:30"><option value="02:45">'+
+                '<option value="03:00"><option value="03:15"><option value="03:30"><option value="03:45">'+
+                '<option value="04:00"><option value="04:15"><option value="04:30"><option value="04:45">'+
+                '<option value="05:00"><option value="05:15"><option value="05:30"><option value="05:45">'+
+                '<option value="06:00"><option value="06:15"><option value="06:30"><option value="06:45">'+
+                '<option value="07:00"><option value="07:15"><option value="07:30"><option value="07:45">'+
+                '<option value="08:00"><option value="08:15"><option value="08:30"><option value="08:45">'+
+                '<option value="09:00"><option value="09:15"><option value="09:30"><option value="09:45">'+
+                '<option value="10:00"><option value="10:15"><option value="10:30"><option value="10:45">'+
+                '<option value="11:00"><option value="11:15"><option value="11:30"><option value="11:45">'+
+                '<option value="12:00"><option value="12:15"><option value="12:30"><option value="12:45">'+
+                '<option value="13:00"><option value="13:15"><option value="13:30"><option value="13:45">'+
+                '<option value="14:00"><option value="14:15"><option value="14:30"><option value="14:45">'+
+                '<option value="15:00"><option value="15:15"><option value="15:30"><option value="15:45">'+
+                '<option value="16:00"><option value="16:15"><option value="16:30"><option value="16:45">'+
+                '<option value="17:00"><option value="17:15"><option value="17:30"><option value="17:45">'+
+                '<option value="18:00"><option value="18:15"><option value="18:30"><option value="18:45">'+
+                '<option value="19:00"><option value="19:15"><option value="19:30"><option value="19:45">'+
+                '<option value="20:00"><option value="20:15"><option value="20:30"><option value="20:45">'+
+                '<option value="21:00"><option value="21:15"><option value="21:30"><option value="21:45">'+
+                '<option value="22:00"><option value="22:15"><option value="22:30"><option value="22:45">'+
+                '<option value="23:00"><option value="23:15"><option value="23:30"><option value="23:45">'+
+
+
+            '</datalist>'+
+        '</div>'+
+        "<div>" +
+            "<input type='button' class='route_end' id='route2'>" +
+            '<input id="end" type="date" style="width: 130px" value="2018-02-19" />'+
+            '<input id="hour2" list="times"  style="width: 45px;height: 26px"/>'+
+        '</div>'+
         "<div id='thematicmapDIV'style='height:98%;'>" +
           //热力图
-         "<div style='height:25px;background:#30A4D5;margin-top:2px;width: 98%;margin-left: 3px;'>" +
+        "<div style='height:25px;background:#30A4D5;margin-top:2px;width: 98%;margin-left: 3px;'>" +
               "<span style='margin-left:5px;font-size: 13px;color:white;'>热力图</span>" +
-         "</div>" +
+        "</div>" +
         '<div id="heatmapFeatureLayer" style="padding:5px;">' +
              '<div style="float:left;">' +
              '<input type="radio" name="heatmapFeatureLayer"  id="heatmap1" style="width: 15px;height: 15px;vertical-align: middle;margin: auto;"/>' +
@@ -57,41 +92,6 @@ DCI.thematicmap = {
              '<label style="font-weight: normal;vertical-align: middle;margin: auto;">预测压力</label>' +
         '</div>' +
 
-/*         "<!-- 框选设置 -->" +
-        "<div class='spatialquery_menu_tool'>" +
-            "<ul>" +
-              "<li class='spatialqueryPtool' onclick='DCI.thematicmap.extentQuery(\"polygon\")'><a href='javascript:void(0)' class='downloadlayerbg'><span class='bpolylabel'></span>多边形框选</a></li>" +
-              "<li class='menupubline'></li>" +
-              "<li class='spatialqueryRtool' onclick='DCI.thematicmap.extentQuery(\"rectangle\")'><a href='javascript:void(0)' class='downloadlayerbg'><span class='brectanglelabel'></span>矩形框选</a></li>" +
-              "<li class='menupubline'></li>" +
-              "<li class='spatialqueryCtool' onclick='DCI.thematicmap.InitState(map)'><a href='javascript:void(0)' class='downloadlayerbg'><span class='dellabel'></span>清空</a></li>" +
-            "</ul>" +
-        "</div>" +    */     
-/*dl 
-        //聚合图
-         "<div style='height:25px;background:#30A4D5;margin-top:10px;width: 98%;margin-left: 3px;float: left;'>" +
-              "<span style='margin-left:5px;font-size: 13px;color:white;'>聚合图</span>" +
-         "</div>" +
-        '<div id="clusterLayer" style="padding:5px;float: left;">' +
-             '<input type="checkbox" name="clusterlayer" id="clusterlayer1" value="0"  style="width: 15px;height: 15px;vertical-align: middle;margin: auto;"/>' +
-             '<label style="font-weight: normal;vertical-align: middle;margin: auto;">聚合图</label>' +
-        '</div>' +
-
-        //统计图
-         "<div style='height:25px;background:#30A4D5;margin-top:10px;width: 98%;margin-left: 3px;float: left;'>" +
-              "<span style='margin-left:5px;font-size: 13px;color:white;'>统计图</span>" +
-         "</div>" +
-        '<div id="chartLayer" style="padding:5px;float: left;">' +
-            '<div style="float:left;">' +
-               '<input type="radio" name="chartlayer"  id="chartlayer1" style="width: 15px;height: 15px;vertical-align: middle;margin: auto;" />' +
-               '<label style="font-weight: normal;vertical-align: middle;margin: auto;">arcgis统计图</label>' +
-             '</div>' +
-             '<div style="float:left;clear: both;">' +
-               '<input type="radio" name="chartlayer"  id="chartlayer2" style="width: 15px;height: 15px;vertical-align: middle;margin: auto;"/>' +
-               '<label style="font-weight: normal;vertical-align: middle;margin: auto;">echarts统计图</label>' +
-             '</div>' +
-        '</div>' +
-*/
         '<button class="btn btn-default btn-xs" id="clearAllMap"  style="margin-right: 15px;height: 25px;float: right;clear: both;">重置</button>'+
 
         "</div>",

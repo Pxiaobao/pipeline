@@ -90,7 +90,6 @@ MapConfig.pipepngUrl = "http://192.168.1.55/pipepress/raster/output/";
  *type为地图类型，0为wmts，1为mapserver切片,2为高德地图矢量，3为高德卫星,4为天地图矢量,5为天地图卫星,6为百度地图矢量,7为百度卫星
  */
 MapConfig.arcvecMap = { Url: "http://192.168.1.55:6080/arcgis/rest/services/jcsj/MapServer", labelUrl: "矢量", type: 1 };//上海矢量底图服务-ArcGIS切片格式
-MapConfig.arcimgMap = { Url: "http://localhost:6080/arcgis/rest/services/dlImgMap/MapServer", labelUrl: "影像", type: 1 };//上海影像底图服务-ArcGIS切片格式
 /*图层目录构造*/
 /* MapConfig.zNodes = [
     { id: 1, pId: 0, name: "设施", checked: false, iconOpen: "" + getRootPath() + "Content/images/legend/1_open.png", iconClose: "" + getRootPath() + "Content/images/legend/1_close.png" },

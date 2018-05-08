@@ -68,7 +68,6 @@ function load2DMap() {
     //];
     var mapLabelArray = [//type为地图类型，0为wmts，1为mapserver切片,2为高德地图矢量，3为高德卫星,4为天地图矢量,5为天地图卫星
                  { label: MapConfig.arcvecMap.labelUrl, type: MapConfig.arcvecMap.type, url: { map: MapConfig.arcvecMap.Url, anno: "" }, className: "vecType" },
-                 { label: MapConfig.arcimgMap.labelUrl, type: MapConfig.arcimgMap.type, url: { map: MapConfig.arcimgMap.Url, anno: "" }, className: "imgType" },
 
     ];
     layerswitchertoolbar = new LayerSwitcherToolbar(map, mapLabelArray, false); //默认加载第一个图层,参数说明:map为地图对象;mapLabelArray图层数组配置;false或者true,说明是否重新创建map对象,假如map的瓦片级别以及分辨率和坐标系不一致的话,设置true,反之设置false
@@ -137,14 +136,6 @@ function load2DMap() {
     var pane1 = DCI.sidebarCtrl.createItem("空间查询", "查询", false, "nav_but_spa", "spatialQuery");
     pane1.append(DCI.SpatialQuery.Html);//加载显示的内容
     DCI.SpatialQuery.Init(map);
-    //dl最短路径分析
-    //var panel = DCI.sidebarCtrl.createItem("路线导航", "导航", false, "nav_but_ml", "road");
-    //panel.append(DCI.Route.html);//加载显示的内容
-    //DCI.Route.Init(map);
-    //dl路径附近设施服务分析
-    //var panel = DCI.sidebarCtrl.createItem("路线设施", "设施", false, "nav_but_ml", "closestroad");
-    //panel.append(ems.route.html);//加载显示的内容
-    //ems.route.Init(map);
     //专题图模块
     var panel = DCI.sidebarCtrl.createItem("专题图", "专题", false, "nav_but_ss", "thematicmap");
     panel.append(DCI.thematicmap.Html);//加载显示的内容
