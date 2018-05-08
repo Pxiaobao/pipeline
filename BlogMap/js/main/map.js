@@ -59,13 +59,6 @@ function load2DMap() {
     //加载底图切换工具
     var map = new esri.Map("map", { logo: false, slider: false });//创建一个map对象，然后地图填充在div容器，通过div的ID（map）来关联;{}里面是构造地图的可选参数设置，logo设置图标是否显示，lods是设置瓦片地图的显示级别level有哪些，从配置文件config获取
     allMap = map;
-    //var mapLabelArray = [//type为地图类型，0为wmts，1为mapserver切片,2为高德地图矢量，3为高德卫星,4为天地图矢量,5为天地图卫星
-    //                 { label: MapConfig.arcvecMap.labelUrl, type: MapConfig.arcvecMap.type, url: { map: MapConfig.arcvecMap.Url, anno: "" }, className: "vecType" },
-    //                 { label: MapConfig.tdtimgMap.labelUrl, type: MapConfig.tdtimgMap.type, className: "imgType" },
-    //                 { label: MapConfig.tdtvecMap.labelUrl, type: MapConfig.tdtvecMap.type, className: "vecType" },
-    //                 { label: MapConfig.gdimgMap.labelUrl, type: MapConfig.gdimgMap.type, className: "imgType" },
-    //                 { label: MapConfig.gdvecMap.labelUrl, type: MapConfig.gdvecMap.type, className: "vecType" },
-    //];
     var mapLabelArray = [//type为地图类型，0为wmts，1为mapserver切片,2为高德地图矢量，3为高德卫星,4为天地图矢量,5为天地图卫星
                  { label: MapConfig.arcvecMap.labelUrl, type: MapConfig.arcvecMap.type, url: { map: MapConfig.arcvecMap.Url, anno: "" }, className: "vecType" },
 

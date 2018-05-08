@@ -29,64 +29,11 @@
 					var curLyrAnno = new esri.layers.ArcGISTiledMapServiceLayer(item.url.anno, {id: "BaseMapID_Anno"});
 					T.map.addLayer(curLyrAnno, 1);
 				}
-			} else if(mapType==0){
-				//WMTS
-				curLyr = new WMTSLayer(item.url.map, DUtil.extend({id: "BaseMapID"}, item.extInfo));
-				curLyr.esriLayer.id = "BaseMapID";
-				T.map.addLayer(curLyr, 0);
-				if (item.url.anno != null && item.url.anno != "") {
-					var curLyrAnno = new WMTSLayer(item.url.anno, DUtil.extend({id: "BaseMapID_Anno"}, item.extInfo));
-					T.map.addLayer(curLyrAnno, 1);
-				}
-			}else if(mapType==2){
-				//高德矢量图层
-				curLyr = new GAODELayer({id: "BaseMapID",esriLayerType:"road"});
-				curLyr.esriLayer.id = "BaseMapID";
-				T.map.addLayer(curLyr.esriLayer, 0);
+			}else {
+				alert("map type error,please check map.layerSwitcherToolbar.js and config.js")
 			}
-			else if(mapType==3){
-				//高德卫星图层
-				curLyr = new GAODELayer({id: "BaseMapID",esriLayerType:"st"});
-				curLyr.esriLayer.id = "BaseMapID";
-				T.map.addLayer(curLyr.esriLayer, 0);
-				var curLyrAnno = new GAODELayer({ id: "BaseMapID_Anno", esriLayerType: "label" });
-				curLyrAnno.esriLayer.id = "BaseMapID_Anno";
-				T.map.addLayer(curLyrAnno.esriLayer, 1);
-			}
-			else if(mapType==4){
-				//天地图矢量图层
-				curLyr = new TDTLayer({id: "BaseMapID",esriLayerType:"vec"});
-				curLyr.esriLayer.id = "BaseMapID";
-				T.map.addLayer(curLyr.esriLayer, 0);
-				var curLyrAnno = new TDTLayer({id: "BaseMapID_Anno",esriLayerType:"cva"});
-				curLyrAnno.esriLayer.id = "BaseMapID_Anno";
-				T.map.addLayer(curLyrAnno.esriLayer, 1);
-			}			
-			else if(mapType==5){
-				//天地图卫星图层
-				curLyr = new TDTLayer({id: "BaseMapID",esriLayerType:"img"});
-				curLyr.esriLayer.id = "BaseMapID";
-				T.map.addLayer(curLyr.esriLayer, 0);
-				var curLyrAnno = new TDTLayer({id: "BaseMapID_Anno",esriLayerType:"cia"});
-				curLyrAnno.esriLayer.id = "BaseMapID_Anno";
-				T.map.addLayer(curLyrAnno.esriLayer, 1);
-			}
-			else if (mapType == 6) {
-			    //百度矢量图层
-			    curLyr = new BDLayer({ id: "BaseMapID", esriLayerType: "bd_vec" });
-			    curLyr.esriLayer.id = "BaseMapID";
-			    T.map.addLayer(curLyr.esriLayer, 0);
-			}
-			else if (mapType == 7) {
-			    //百度卫星图层
-			    curLyr = new BDLayer({ id: "BaseMapID", esriLayerType: "bd_img" });
-			    curLyr.esriLayer.id = "BaseMapID";
-			    T.map.addLayer(curLyr.esriLayer, 0);
-			    var curLyrAnno = new BDLayer({ id: "BaseMapID_Anno", esriLayerType: "bd_cva" });
-			    curLyrAnno.esriLayer.id = "BaseMapID_Anno";
-			    T.map.addLayer(curLyrAnno.esriLayer, 1);
-			}
-			
+	
+	
 		}
 	},
 	changeBaseMap: function (arg) {
@@ -133,54 +80,9 @@
 				    //销毁对象map,再重现创建map	    
 				    T.createMap(mapType);
 				}
-				if(mapType==2){
-					//高德矢量图层
-					curLyr = new GAODELayer({id: "BaseMapID",esriLayerType:"road"});
-					curLyr.esriLayer.id = "BaseMapID";
-					T.map.addLayer(curLyr.esriLayer, 0);
-				}
-				else if(mapType==3){
-					//高德卫星图层
-					curLyr = new GAODELayer({id: "BaseMapID",esriLayerType:"st"});
-					curLyr.esriLayer.id = "BaseMapID";
-					T.map.addLayer(curLyr.esriLayer, 0);
-					var curLyrAnno = new GAODELayer({ id: "BaseMapID_Anno", esriLayerType: "label" });
-					curLyrAnno.esriLayer.id = "BaseMapID_Anno";
-					T.map.addLayer(curLyrAnno.esriLayer, 1);
-				}
-				else if(mapType==4){
-					//天地图矢量图层
-					curLyr = new TDTLayer({id: "BaseMapID",esriLayerType:"vec"});
-					curLyr.esriLayer.id = "BaseMapID";
-					T.map.addLayer(curLyr.esriLayer, 0);
-					var curLyrAnno = new TDTLayer({id: "BaseMapID_Anno",esriLayerType:"cva"});
-					curLyrAnno.esriLayer.id = "BaseMapID_Anno";
-					T.map.addLayer(curLyrAnno.esriLayer, 1);
-				}			
-				else if(mapType==5){
-					//天地图卫星图层
-					curLyr = new TDTLayer({id: "BaseMapID",esriLayerType:"img"});
-					curLyr.esriLayer.id = "BaseMapID";
-					T.map.addLayer(curLyr.esriLayer, 0);
-					var curLyrAnno = new TDTLayer({id: "BaseMapID_Anno",esriLayerType:"cia"});
-					curLyrAnno.esriLayer.id = "BaseMapID_Anno";
-					T.map.addLayer(curLyrAnno.esriLayer, 1);
-				}
-				else if (mapType == 6) {
-				    //百度矢量图层
-				    curLyr = new BDLayer({ id: "BaseMapID", esriLayerType: "bd_vec" });
-				    curLyr.esriLayer.id = "BaseMapID";
-				    T.map.addLayer(curLyr.esriLayer, 0);
-				}
-				else if (mapType == 7) {
-				    //百度卫星图层
-				    curLyr = new BDLayer({ id: "BaseMapID", esriLayerType: "bd_img" });
-				    curLyr.esriLayer.id = "BaseMapID";
-				    T.map.addLayer(curLyr.esriLayer, 0);
-				    var curLyrAnno = new BDLayer({ id: "BaseMapID_Anno", esriLayerType: "bd_cva" });
-				    curLyrAnno.esriLayer.id = "BaseMapID_Anno";
-				    T.map.addLayer(curLyrAnno.esriLayer, 1);
-				}
+				
+				
+				
 				
 				
 			}
@@ -212,7 +114,7 @@
 	    T.map = new esri.Map(T.mapDivId, { logo: false, slider: false });
 	    //设置地图初始范围
 	    var initExtent;
-	    switch (mapType)//0为wmts，1为mapserver切片,2为高德地图矢量，3为高德卫星,4为天地图矢量,5为天地图卫星,6为百度地图矢量,7为百度卫星
+	    switch (mapType)//0为wmts，1为mapserver切片
 	    {
 	        case 0:
 	            initExtent = new esri.geometry.Extent({ xmin: MapConfig.mapInitParams.extent.xmin, ymin: MapConfig.mapInitParams.extent.ymin, xmax: MapConfig.mapInitParams.extent.xmax, ymax: MapConfig.mapInitParams.extent.ymax, spatialReference: MapConfig.mapInitParams.spatialReference });
@@ -220,24 +122,7 @@
 	        case 1:
 	            initExtent = new esri.geometry.Extent({ xmin: MapConfig.mapInitParams.extent.xmin, ymin: MapConfig.mapInitParams.extent.ymin, xmax: MapConfig.mapInitParams.extent.xmax, ymax: MapConfig.mapInitParams.extent.ymax, spatialReference: MapConfig.mapInitParams.spatialReference });
 	            break;
-	        case 2:
-	            initExtent = new esri.geometry.Extent({ xmin: MapConfig.mapInitParams.gaode_extent.xmin, ymin: MapConfig.mapInitParams.gaode_extent.ymin, xmax: MapConfig.mapInitParams.gaode_extent.xmax, ymax: MapConfig.mapInitParams.gaode_extent.ymax, spatialReference: MapConfig.mapInitParams.gaode_spatialReference });
-	            break;
-	        case 3:
-	            initExtent = new esri.geometry.Extent({ xmin: MapConfig.mapInitParams.gaode_extent.xmin, ymin: MapConfig.mapInitParams.gaode_extent.ymin, xmax: MapConfig.mapInitParams.gaode_extent.xmax, ymax: MapConfig.mapInitParams.gaode_extent.ymax, spatialReference: MapConfig.mapInitParams.gaode_spatialReference });
-	            break;
-	        case 4:
-	            initExtent = new esri.geometry.Extent({ xmin: MapConfig.mapInitParams.extent.xmin, ymin: MapConfig.mapInitParams.extent.ymin, xmax: MapConfig.mapInitParams.extent.xmax, ymax: MapConfig.mapInitParams.extent.ymax, spatialReference: MapConfig.mapInitParams.spatialReference });
-	            break;
-	        case 5:
-	            initExtent = new esri.geometry.Extent({ xmin: MapConfig.mapInitParams.extent.xmin, ymin: MapConfig.mapInitParams.extent.ymin, xmax: MapConfig.mapInitParams.extent.xmax, ymax: MapConfig.mapInitParams.extent.ymax, spatialReference: MapConfig.mapInitParams.spatialReference });
-	            break;
-	        case 6:
-	            initExtent = new esri.geometry.Extent({ xmin: MapConfig.mapInitParams.bd_extent.xmin, ymin: MapConfig.mapInitParams.bd_extent.ymin, xmax: MapConfig.mapInitParams.bd_extent.xmax, ymax: MapConfig.mapInitParams.bd_extent.ymax, spatialReference: MapConfig.mapInitParams.bd_spatialReference });
-	            break;
-	        case 7:
-	            initExtent = new esri.geometry.Extent({ xmin: MapConfig.mapInitParams.bd_extent.xmin, ymin: MapConfig.mapInitParams.bd_extent.ymin, xmax: MapConfig.mapInitParams.bd_extent.xmax, ymax: MapConfig.mapInitParams.bd_extent.ymax, spatialReference: MapConfig.mapInitParams.bd_spatialReference });
-	            break;
+	        
 	    }
 	    T.map.setExtent(initExtent);
 	    //重新绑定地图鼠标移动事件
@@ -481,194 +366,5 @@ WMSLayer = DObject({
 	setImageTransparency: function (flag) {
 		return this.esriLayer.imageTransparency = flag;
 	}
-});
-//高德地图图层扩展
-GAODELayer = DObject({
-	id:null,
-	esriLayer: null,
-	esriLayerType:'road',
-		construct: function (options) {
-			DUtil.extend(this, options);
-//			dojo.declare.safeMixin(this, options);
-			dojo.declare("GaoDeTiledMapServiceLayer", esri.layers.TiledMapServiceLayer, {
-				id:null,
-				layertype: "road",//图层类型
-				constructor: function (args) {
-				    this.spatialReference = new esri.SpatialReference(MapConfig.mapInitParams.gaode_spatialReference);
-					DUtil.extend(this, args);
-					this.fullExtent = new esri.geometry.Extent({
-						xmin: MapConfig.params_gaode.fullExtent.xmin,
-						ymin: MapConfig.params_gaode.fullExtent.ymin,
-						xmax: MapConfig.params_gaode.fullExtent.xmax,
-						ymax: MapConfig.params_gaode.fullExtent.ymax,
-						spatialReference: this.spatialReference
-					});
-					this.initialExtent = this.fullExtent;
-					this.tileInfo = new esri.layers.TileInfo(MapConfig.params_gaode);
-					this.loaded = true;
-					this.onLoad(this);
-				},
-				/**
-				 * 根据不同的layType返回不同的图层
-				 * @param level
-				 * @param row
-				 * @param col
-				 * @returns {string}
-				 */
-				 getTileUrl: function (level, row, col) {
-					 var url = "";
-					 switch (this.layertype) {
-					 case "road"://矢量
-						 url = 'http://webrd0' + (col % 4 + 1) + '.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x=' + col + '&y=' + row + '&z=' + level;
-						 break;
-					 case "st"://影像
-						 url = 'http://webst0' + (col % 4 + 1) + '.is.autonavi.com/appmaptile?style=6&x=' + col + '&y=' + row + '&z=' + level;
-						 break;
-					 case "label"://影像标
-						 url = 'http://webst0' + (col % 4 + 1) + '.is.autonavi.com/appmaptile?style=8&x=' + col + '&y=' + row + '&z=' + level;
-						 break;
-					 default:
-						 url = 'http://webrd0' + (col % 4 + 1) + '.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x=' + col + '&y=' + row + '&z=' + level;
-					 break;
-					 }
-					 return url;
-				 }
-			});
-			this.esriLayer = new GaoDeTiledMapServiceLayer({id:this.id,layertype:this.esriLayerType});
-		},
-		hide: function () {
-			this.esriLayer.hide();
-		},
-		show: function () {
-			this.esriLayer.show();
-		}
-});
-//百度地图图层扩展
-BDLayer = DObject({
-    id: null,
-    esriLayer: null,
-    esriLayerType: 'bd_vec',
-    construct: function (options) {
-        DUtil.extend(this, options);
-        dojo.declare("BDTiledMapServiceLayer", esri.layers.TiledMapServiceLayer, {
-            id: null,
-            layertype: "bd_vec",//图层类型
-            constructor: function (args) {
-                this.spatialReference = new esri.SpatialReference(MapConfig.mapInitParams.bd_spatialReference);
-                DUtil.extend(this, args);
-                this.fullExtent = new esri.geometry.Extent({
-                    xmin: MapConfig.params_bd.fullExtent.xmin,
-                    ymin: MapConfig.params_bd.fullExtent.ymin,
-                    xmax: MapConfig.params_bd.fullExtent.xmax,
-                    ymax: MapConfig.params_bd.fullExtent.ymax,
-                    spatialReference: this.spatialReference
-                });
-                this.initialExtent = this.fullExtent;
-                this.tileInfo = new esri.layers.TileInfo(MapConfig.params_bd);
-                this.loaded = true;
-                this.onLoad(this);
-            },
-            /**
-             * 根据不同的layType返回不同的图层
-             * @param level
-             * @param row
-             * @param col
-             * @returns {string}
-             */
-            getTileUrl: function (level, row, col) {
-                var zoom = level - 1;
-                var offsetX = parseInt(Math.pow(2, zoom));
-                var offsetY = offsetX - 1;
-                var numX = col - offsetX, numY = (-row) + offsetY;
-                var num = (col + row) % 8 + 1;
-                var url = "";
-                switch (this.layertype) {
-                    case "bd_vec"://矢量
-                        url = "http://online" + num + ".map.bdimg.com/tile/?qt=tile&x=" + numX + "&y=" + numY + "&z=" + level + "&styles=pl&scaler=1&udt=20141103";
-                        break;
-                    case "bd_img"://影像
-                        url = "http://shangetu" + num + ".map.bdimg.com/it/u=x=" + numX + ";y=" + numY + ";z=" + level + ";v=009;type=sate&fm=46&udt=20141015";
-                        break;
-                    case "bd_cva"://影像标注
-                        url = "http://online" + num + ".map.bdimg.com/tile/?qt=tile&x=" + numX + "&y=" + numY + "&z=" + level + "&styles=sl&udt=20141015";
-                        break;
-                    default:
-                        url = "http://online" + num + ".map.bdimg.com/tile/?qt=tile&x=" + numX + "&y=" + numY + "&z=" + level + "&styles=pl&scaler=1&udt=20141103";
-                        break;
-                }
-                return url;
-            }
-        });
-        this.esriLayer = new BDTiledMapServiceLayer({ id: this.id, layertype: this.esriLayerType });
-    },
-    hide: function () {
-        this.esriLayer.hide();
-    },
-    show: function () {
-        this.esriLayer.show();
-    }
-});
-//天地图图层扩展
-TDTLayer = DObject({
-	id:null,
-	esriLayer: null,
-	esriLayerType:'vec',//默认矢量类型
-		construct: function (options) {
-			DUtil.extend(this, options);
-			dojo.declare("TDTTiledMapServiceLayer", esri.layers.TiledMapServiceLayer, {
-				id:null,
-				layertype: "vec",//图层类型
-				constructor: function (args) {
-					this.spatialReference = new esri.SpatialReference(MapConfig.mapInitParams.spatialReference);
-					DUtil.extend(this, args);
-					this.fullExtent = new esri.geometry.Extent({
-						xmin: MapConfig.params_tdt.fullExtent.xmin,
-						ymin: MapConfig.params_tdt.fullExtent.ymin,
-						xmax: MapConfig.params_tdt.fullExtent.xmax,
-						ymax: MapConfig.params_tdt.fullExtent.ymax,
-						spatialReference: this.spatialReference
-					});
-					this.initialExtent = this.fullExtent;
-					this.tileInfo = new esri.layers.TileInfo(MapConfig.params_tdt);
-					this.loaded = true;
-					this.onLoad(this);
-				},
-				/**
-				 * 根据不同的layType返回不同的图层
-				 * @param level
-				 * @param row
-				 * @param col
-				 * @returns {string}
-				 */
-				 getTileUrl: function (level, row, col) {
-					 var url = "";
-					 switch (this.layertype) {
-					 case "vec"://矢量类型
-						 url = "http://t" + col % 8 + ".tianditu.cn/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + level + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
-						 break;
-					 case "cva"://矢量注记类型
-						 url = "http://t" + row % 8 + ".tianditu.cn/cva_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cva&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + level + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
-						 break;
-					 case "img"://卫星类型
-						 url = "http://t" + row % 8 + ".tianditu.cn/img_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + level + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
-						 break;	
-					 case "cia"://卫星注记类型
-						 url = "http://t" + row % 8 + ".tianditu.cn/cia_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cia&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + level + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
-						 break;							 
-					 default://矢量类型
-						 url = "http://t" + col % 8 + ".tianditu.cn/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + level + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
-					     break;
-					 }
-					 return url;
-				 }
-			});
-			this.esriLayer = new TDTTiledMapServiceLayer({id:this.id,layertype:this.esriLayerType});
-		},
-		hide: function () {
-			this.esriLayer.hide();
-		},
-		show: function () {
-			this.esriLayer.show();
-		}
 });
 
