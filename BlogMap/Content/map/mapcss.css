@@ -207,9 +207,95 @@ table.imagetable td {
 	padding: 2px 4px; margin: 0pt 2px; font-size: 12px; -moz-user-select: none; line-height: 17px;  color: rgb(0, 0, 0); cursor: pointer;
 } 
 /*------------end地图标签样式------------*/
+/*选择时间选项卡*/
+.mappop_tabT {
+    width: 200px;
+    top: 0;
+    margin: 0;
+    
+}
 
+.mappop_tab,
+.mappop_tab li {
+    padding: 0;
+    margin: 0;
+    border: none
+}
+
+.mappop_tab {
+    height: 23px;
+    display: block;
+    width: 200px;
+}
+
+.mappop_tab li {
+    display: block;
+    float: left;
+    height: 18px;
+    line-height: 18px;
+    padding: 2px 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.mappop_tab li.mappop_current {
+    display: block;
+    color: red;
+    text-align: center;
+    background-color: #fff;
+    border-top: 1px solid red;
+    border-right: 1px solid red;
+    border-left: 1px solid red;
+    border-bottom: 1px solid red;
+    padding: 0px 20px;
+}
+
+.mappop_show,
+hidden {
+    width: 198px;
+    height: 100px;
+    margin: 0;
+    text-align: left;
+}
+
+.mappop_hidden {
+    display: none;
+}
+
+.mappop_show {
+    display: block;
+}
+
+.mappop_con {
+    padding: 10px;
+}
+
+.map_popup {
+    position:absolute;
+    right:10px;
+    /*top:15px;*/
+    top:40px;
+    font-family:"宋体";
+    font-size:12px;
+    width:200px;
+    z-index:1100; 
+    background-color:white;
+}
+.update_lbl, .update_time {
+    float: left;
+    color: #666;
+}
+.mappop_show .update {
+    float: left;
+    width: 13px;
+    height: 14px;
+    background: url(../../Content/images/index/tools_menu_3d43297.gif) no-repeat -12px -18px;
+    margin-left: 5px;
+    cursor: pointer;
+}
 /*底图切换控件*/
 .map_switch {
+    display: none;
     position:absolute;
     right:10px;
     /*top:15px;*/

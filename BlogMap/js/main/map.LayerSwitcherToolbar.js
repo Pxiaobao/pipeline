@@ -1,7 +1,20 @@
 ﻿LayerSwitcherToolbar = DObject({
     mapDivId: null,
     map: null,
-    flag:null,
+	flag:null,
+	html:
+	'<div class="mappop_tabT">'+
+		'<ul class="mappop_tab">'+
+			'<li id="tabId1" class="mappop_current" onclick="tab(\'tabId1\',\'tabC1\');">CODEFANS.NET</li>'+
+			'<li id="tabId2" onclick="tab(\'tabId2\',\'tabC2\');">ASP</li>'+
+		'</ul>'+
+	'</div>'+
+	'<div class="mappop_show" id="tabC1">'+
+		'<div class="mappop_con">模板。</div>'+
+	'</div>'+
+	'<div class="mappop_hidden" id="tabC2">'+
+		'<div class="mappop_con">ASP</div>'+
+	'</div>',
     construct: function (map, options,flag) {
 	    this.mapDivId = map.id;
 	    this.map = map;
@@ -80,32 +93,9 @@
 				    //销毁对象map,再重现创建map	    
 				    T.createMap(mapType);
 				}
-				
-				
-				
-				
-				
+		
 			}
 		}
-		//else {
-		//    //销毁对象map,再重现创建map	    
-		//    T.createMap(mapType);
-		//	if (mapType == 1) {
-		//		var curLyr = new esri.layers.ArcGISTiledMapServiceLayer(service.url.map, {id: "BaseMapID"});
-		//		T.map.addLayer(curLyr, 0);
-		//		if (service.url.anno != null && service.url.anno != "") {
-		//			var curLyrAnno = new esri.layers.ArcGISTiledMapServiceLayer(service.url.anno, {id: "BaseMapID_Anno"});
-		//			T.map.addLayer(curLyrAnno, 1);
-		//		}
-		//	} else {
-		//		curLyr = new WMTSLayer(service.url.map, DUtil.extend({id: baseMapID}, service.extInfo));
-		//		T.map.addLayer(curLyr, 0);
-		//		if (service.url.anno != null && service.url.anno != "") {
-		//			var curLyrAnno = new WMTSLayer(service.url.anno, DUtil.extend({id: baseMapAnnoID}, service.extInfo));
-		//			T.map.addLayer(curLyrAnno, 1);
-		//		}
-		//	}
-		//}
 	},
 	createMap: function (mapType) {
 	    //销毁对象map,再重现创建map	
@@ -147,7 +137,10 @@ LayerContorl = DObject({
     items: [],
     index: 0,
     changMap: null,
-    itemsInfo: null,
+	itemsInfo: null,
+	tab: function(tabId, tabC){
+
+	},
     construct: function (divId, options) {
         var T = this;
         this.map = map;
@@ -162,7 +155,111 @@ LayerContorl = DObject({
         ctlDiv.onmouseout = function () {
             T._itemMouseout(this);
         };
-        pDiv.appendChild(ctlDiv);
+		pDiv.appendChild(ctlDiv);
+		var  mappop = document.createElement("div");
+		mappop.id = "getId";
+		mappop.className = "map_popup";
+		mappop.innerHTML = '<div class="mappop_tabT">'+
+		'<ul class="mappop_tab">'+
+			'<li id="tabId1" class="mappop_current" );">实时状况</li>'+
+			'<li id="tabId2" );">管况预测</li>'+
+		'</ul>'+
+	'</div>'+
+	'<div class="mappop_show" id="tabC1">'+
+		'<div><span class="update_lbl">更新时间:</span>'+
+		'<span id="time_trafficCtrl" class="update_time">--:--</span>'+
+		'<span id="bt_trafficCtrl" class="update" title="更新"></span></div>'+
+	'</div>'+
+	'<div class="mappop_hidden" id="tabC2">'+
+		'<input id="history_time" type="datetime-local" value="2015-09-24T13:59:59"/>'+
+		'<span id="bt_trafficCtrl2" class="update" title="更新"></span></div>'+
+	'</div>';
+		pDiv.appendChild(mappop);
+		$("#tabId1").bind("click", function () {
+			var len = document.getElementById('getId').getElementsByTagName('li').length;
+			for (i = 1; i <= len; i++) {
+				if ("tabId" + i == "tabId1") {
+					document.getElementById("tabId1").className = "mappop_current";
+				} else {
+					document.getElementById("tabId" + i).className = "";
+				}
+				if ("tabC" + i == "tabC1") {
+					document.getElementById("tabC1").className = "mappop_show";
+				} else {
+					document.getElementById("tabC" + i).className = "mappop_hidden";
+				}
+			}
+		});
+		$("#tabId2").bind("click", function () {
+			var len = document.getElementById('getId').getElementsByTagName('li').length;
+			for (i = 1; i <= len; i++) {
+				if ("tabId" + i == "tabId2") {
+					document.getElementById("tabId2").className = "mappop_current";
+				} else {
+					document.getElementById("tabId" + i).className = "";
+				}
+				if ("tabC" + i == "tabC2") {
+					document.getElementById("tabC2").className = "mappop_show";
+				} else {
+					document.getElementById("tabC" + i).className = "mappop_hidden";
+				}
+			}
+		});
+		$('#bt_trafficCtrl').click(function () { 
+			var month = (Array(2).join(0) + (new Date().getMonth()+1).toString()).slice(-2);
+			var day = (Array(2).join(0) + (new Date().getDate()-1).toString()).slice(-2);
+			var minute = (Array(2).join(0) + new Date().getMinutes().toString()).slice(-2);
+			var hour = (Array(2).join(0) + new Date().getHours().toString()).slice(-2);
+			var req_date = {date:new Date().getFullYear().toString()+month+day,time:hour+minute}
+			$.ajax({
+				type: "POST",
+				url: "http://192.168.1.21:5001/info/",
+				data: req_date,
+				dataType: "JSON",
+				success: function (response) {
+					alert("success");
+					if(response.date == "OK"){
+						$('#time_trafficCtrl').html(hour+":"+minute);
+					}
+				},
+				error: function(response){
+					alert("error")
+				}
+			});
+			
+		});
+
+		$('#bt_trafficCtrl2').click(function () { 
+
+ 			var year = history_time.value.substr(0,4);
+			var month = history_time.value.substr(5,2);
+			var day = history_time.value.substr(8,2);
+			var hour = history_time.value.substr(11,2);
+			var minute = history_time.value.substr(14,2);		
+			var req_date = {date:year+month+day,time:hour+minute}
+			$.ajax({
+				type: "POST",
+				url: "http://192.168.1.21:5001/info/",
+				data: req_date,
+				dataType: "JSON",
+				success: function (response) {
+					alert("success");
+					if(response.date == "OK"){
+						var curLyr = DCI.Catalog.map.getLayer("layer11");
+						curLyr.refresh();
+					}
+				},
+				error: function(response){
+					alert("error")
+				}
+			}); 
+			
+		});
+		
+
+
+
+
         for (var i = 0; i < options.length; i++) {
             var item = options[i];
             //var label = this._drawItem(i, item.label, item.imgUrl);
