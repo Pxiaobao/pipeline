@@ -11,16 +11,18 @@ DCI.interPolate = {
     hou: null,
     freq: null,
     imgar: [],//图片数组
-    times:['0000','0015','0030','0045','0100','0115','0130','0145','0200','0215','0230','0245','0300','0315','0330','0345','0400','0415','0430','0445','0500','0515','0530','0545','0600','0615','0630','0645','0700','0715','0730','0745','0800'],
+    times:['0000','0015','0030','0045','0100','0115','0130','0145','0200','0215','0230','0245','0300','0315','0330','0345','0400','0415','0430','0445','0500','0515','0530','0545','0600','0615','0630','0645','0700','0715','0730','0745','0800',
+        '0815','0830','0845','0900','0915','0930','0945','1000','1015','1030','1045','1100','1115','1130','1145','1200','1215','1230','1245','1300','1315','1330','1345','1400','1415','1430','1445','1500','1515','1530','1545','1600','1615',
+        '1630','1645','1700','1715','1730','1745','1800','1815','1830','1845','1900','1915','1930','1945','2000','2015','2030','2045','2100','2115','2130','2145','2200','2215','2230','2245','2300','2315','2330','2345'],
     //模块初始化函数
     Init: function (map) {
         DCI.interPolate.map = map;
         var c = 0;
         var t;
         //预加载时间图片
-        for(i=1;i<24;i++){
+        for(i=0;i<DCI.interPolate.times.length;i++){
           DCI.interPolate.imgar[i] = new Image();
-          DCI.interPolate.imgar[i].src = "./Content/images/map/index/"+i+".png"; 
+          DCI.interPolate.imgar[i].src = "./Content/images/map/clock/"+DCI.interPolate.times[i]+".png"; 
          }
         
         //压力图模块
@@ -42,7 +44,7 @@ DCI.interPolate = {
                 var date = start.value;
                 var hour_start = hour.value.replace(/:/,"");
                 var hour_end = hour2.value.replace(/:/,"");
-                freq = DCI.interPolate.times.indexOf(hour_end) - DCI.interPolate.times.indexOf(hour_start)
+                freq = DCI.interPolate.times.indexOf(hour_end) //- DCI.interPolate.times.indexOf(hour_start)
 
                 y = date.substr(0, 4);
                 m = date.substr(5, 2);
@@ -66,7 +68,7 @@ DCI.interPolate = {
                 if (clockDiv) {
                     
                     clockDiv.css({
-                        "background":'url(./Content/images/map/index/1.png)',
+                        "background":'url(./Content/images/map/clock/0000.png)',
                         "display":'none'                
                     });
                 }
@@ -141,7 +143,7 @@ DCI.interPolate = {
         if (legendDiv) {
             legendDiv.css("display","none");
             $("#map_clock").css({
-                "background":'url(./Content/images/map/index/1.png)',
+                "background":'url(./Content/images/map/clock/0000.png)',
                 "display":'none'                
             });
         }
@@ -166,7 +168,7 @@ DCI.interPolate = {
     //管道分级图只看其中一个时间点的图
     oneloop: function () {
 
-        if (i <= 23) {
+        if (i <= freq) {
             DCI.interPolate.addImageLayer('layer', MapConfig.pipepngUrl + y + '/' + m + '/' + d + '/' + (Array(2).join(0) + i).slice(-2) + '/KPA/KPA.png',
                 -34094.0786696, 4642.90213197, -9329.02913947, 23216.6892795, 2379, 1, i);
 

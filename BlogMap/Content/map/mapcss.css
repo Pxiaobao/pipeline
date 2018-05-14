@@ -276,7 +276,7 @@ hidden {
     /*top:15px;*/
     top:40px;
     font-family:"宋体";
-    font-size:12px;
+    font-size:14px;
     width:200px;
     z-index:1100; 
     background-color:white;
@@ -287,9 +287,10 @@ hidden {
 }
 .mappop_show .update {
     float: left;
-    width: 13px;
-    height: 14px;
-    background: url(../../Content/images/index/tools_menu_3d43297.gif) no-repeat -12px -18px;
+    width: 24px;
+    height: 24px;
+    /*background: url(../../Content/images/index/loading2.gif) center no-repeat;*/
+    background: url(../../Content/images/index/refresh.png) no-repeat;
     margin-left: 5px;
     cursor: pointer;
 }
