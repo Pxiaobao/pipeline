@@ -2,19 +2,6 @@
     mapDivId: null,
     map: null,
 	flag:null,
-	html:
-	'<div class="mappop_tabT">'+
-		'<ul class="mappop_tab">'+
-			'<li id="tabId1" class="mappop_current" onclick="tab(\'tabId1\',\'tabC1\');">CODEFANS.NET</li>'+
-			'<li id="tabId2" onclick="tab(\'tabId2\',\'tabC2\');">ASP</li>'+
-		'</ul>'+
-	'</div>'+
-	'<div class="mappop_show" id="tabC1">'+
-		'<div class="mappop_con">模板。</div>'+
-	'</div>'+
-	'<div class="mappop_hidden" id="tabC2">'+
-		'<div class="mappop_con">ASP</div>'+
-	'</div>',
     construct: function (map, options,flag) {
 	    this.mapDivId = map.id;
 	    this.map = map;
@@ -163,18 +150,33 @@ LayerContorl = DObject({
 		'<ul class="mappop_tab">'+
 			'<li id="tabId1" class="mappop_current" );">实时状况</li>'+
 			'<li id="tabId2" );">管况查询</li>'+
+			'<li id="tabId3" );">管道调整</li>'+
 		'</ul>'+
 	'</div>'+
 	'<div class="mappop_show" id="tabC1">'+
 		'<div><span class="update_lbl">更新时间:</span>'+
-		'<span id="time_trafficCtrl" class="update_time">--:--</span>'+
+		'<span id="time_trafficCtrl" class="update_lbl">--:--</span>'+
 		'<span id="bt_trafficCtrl" class="update" title="更新"></span></div>'+
 	'</div>'+
 	'<div class="mappop_hidden" id="tabC2">'+
-		'<input id="history_time" class="update_time" type="datetime-local" value="2018-02-24T01:00:00"/>'+
+		'<div><input id="history_time" class="update_time" type="datetime-local" value="2018-02-24T01:00:00"/>'+
 		'<div id="bt_trafficCtrl2" class="update" title="更新"></div></div>'+
+	'</div>'+
+	'<div class="mappop_hidden" id="tabC3">'+
+		'<input type="button" id="btn_addpipe1" value="选择管道位置" class="btn_add"></input>'+
 	'</div>';
 		pDiv.appendChild(mappop);
+		$("#btn_addpipe1").click(function () { 
+			if (!DCI.Plot.isload)
+				DCI.Plot.Init(DCI.map2dTool.map);
+
+
+			DCI.Plot.drawPolyline(null, function (geometry) {
+				symbol = DCI.Plot.lineSymbol;
+				DCI.Plot.drawEndPlot(geometry, symbol);
+			});
+			
+		});
 		$("#tabId1").bind("click", function () {
 			var len = document.getElementById('getId').getElementsByTagName('li').length;
 			for (i = 1; i <= len; i++) {
@@ -205,8 +207,23 @@ LayerContorl = DObject({
 				}
 			}
 		});
+		$("#tabId3").bind("click", function () {
+			var len = document.getElementById('getId').getElementsByTagName('li').length;
+			for (i = 1; i <= len; i++) {
+				if ("tabId" + i == "tabId3") {
+					document.getElementById("tabId3").className = "mappop_current";
+				} else {
+					document.getElementById("tabId" + i).className = "";
+				}
+				if ("tabC" + i == "tabC3") {
+					document.getElementById("tabC3").className = "mappop_show";
+				} else {
+					document.getElementById("tabC" + i).className = "mappop_hidden";
+				}
+			}
+		});
 		$('#bt_trafficCtrl').click(function () { 
-			$('#bt_trafficCtrl1').css('background', 'url(./Content/images/index/poi_loading.gif) no-repeat');
+			$('#bt_trafficCtrl').css('background', 'url(./Content/images/index/poi_loading.gif) no-repeat');
 			var month = (Array(2).join(0) + (new Date().getMonth()+1).toString()).slice(-2);
 			var day = (Array(2).join(0) + (new Date().getDate()-1).toString()).slice(-2);
 			var minute = (Array(2).join(0) + new Date().getMinutes().toString()).slice(-2);
@@ -220,7 +237,7 @@ LayerContorl = DObject({
 				success: function (response) {
 					alert("success");
 					if(response.date == "OK"){
-						$('#bt_trafficCtrl1').css('background', 'url(./Content/images/index/refresh.png) no-repeat');
+						$('#bt_trafficCtrl').css('background', 'url(./Content/images/index/refresh.png) no-repeat');
 						$('#time_trafficCtrl').html(hour+":"+minute);
 					}
 				},
