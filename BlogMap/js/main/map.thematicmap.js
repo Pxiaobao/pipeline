@@ -4,10 +4,8 @@ DCI.thematicmap = {
      * 界面设计
     */
     Html:
-        "<div>" +
-            "<input type='button' class='route_star' id='route1'>" +
-            '<input id="start" type="date" style="width: 130px" value="2018-02-19" />'+
-            '<input id="hour" list="times"  style="width: 45px;height: 26px"/>'+
+        "<div>" +           
+            '<input id="start" type="date"  value="2018-05-19" />'+           
             '<datalist id="times">'+
                 '<option value="00:00"><option value="00:15"><option value="00:30"><option value="00:45">'+
                 '<option value="01:00"><option value="01:15"><option value="01:30"><option value="01:45">'+
@@ -33,14 +31,14 @@ DCI.thematicmap = {
                 '<option value="21:00"><option value="21:15"><option value="21:30"><option value="21:45">'+
                 '<option value="22:00"><option value="22:15"><option value="22:30"><option value="22:45">'+
                 '<option value="23:00"><option value="23:15"><option value="23:30"><option value="23:45">'+
-
-
             '</datalist>'+
         '</div>'+
         "<div>" +
-            "<input type='button' class='route_end' id='route2'>" +
-            '<input id="end" type="date" style="width: 130px" value="2018-02-19" />'+
-            '<input id="hour2" list="times"  style="width: 45px;height: 26px"/>'+
+            "<!--input type='button' class='route_star' id='route1'-->" +
+            '<input id="hour" list="times"  style="margin:2px;width: 65px;height: 26px"/>'+
+            '<span>--</span>'+
+            "<!--input type='button' class='route_end' id='route2'-->" +
+            '<input id="hour2" list="times"  style="margin:2px;width: 65px;height: 26px"/>'+
         '</div>'+
         "<div id='thematicmapDIV'style='height:98%;'>" +
           //热力图

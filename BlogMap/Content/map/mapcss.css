@@ -83,13 +83,13 @@
     text-align: center;
 }
 .map-legend1{
-    background: url(../../Content/images/map/index/interpolate.png) no-repeat;
+    background: url(../../Content/images/map/index/interpolate2.png) no-repeat;
     z-index: 888;
     position: absolute;
     left: 10px;
     bottom: 30px;
-    width: 178px;
-    height: 165px;
+    width: 189px;
+    height: 204px;
     border: 1px solid gray;
     border-radius: 8px;
     overflow: hidden;

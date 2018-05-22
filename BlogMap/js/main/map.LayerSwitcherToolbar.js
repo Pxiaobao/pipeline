@@ -169,7 +169,13 @@ LayerContorl = DObject({
 		$("#btn_addpipe1").click(function () { 
 			if (!DCI.Plot.isload)
 				DCI.Plot.Init(DCI.map2dTool.map);
-
+			dojo.connect(DCI.map2dTool.map, "onClick", getCoords);
+			dojo.connect(DCI.map2dTool.map, "onMouseDrag", getCoords);
+			function getCoords(evt) {
+				evt = evt ? evt : (window.event ? window.event : null);
+				var mp = evt.mapPoint;
+				var coordinatesDiv =  mp.x.toFixed(3);
+			}
 
 			DCI.Plot.drawPolyline(null, function (geometry) {
 				symbol = DCI.Plot.lineSymbol;
