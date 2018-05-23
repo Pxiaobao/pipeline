@@ -157,6 +157,7 @@ LayerContorl = DObject({
 		'<div><span class="update_lbl">更新时间:</span>'+
 		'<span id="time_trafficCtrl" class="update_lbl">--:--</span>'+
 		'<span id="bt_trafficCtrl" class="update" title="更新"></span></div>'+
+		'<div><input id="bt_type" value="flux" type="button"/><input style="width:60px" id="value1"/><input style="width:60px" id="value2"/></div>'+
 	'</div>'+
 	'<div class="mappop_hidden" id="tabC2">'+
 		'<div><input id="history_time" class="update_time" type="datetime-local" value="2018-02-24T01:00:00"/>'+
@@ -166,6 +167,13 @@ LayerContorl = DObject({
 		'<input type="button" id="btn_addpipe1" value="选择管道位置" class="btn_add"></input>'+
 	'</div>';
 		pDiv.appendChild(mappop);
+		$("#bt_type").click(function(){
+			if(this.value == 'flux'){
+				this.value = 'press'
+			}
+			else{ this.value = 'flux'}
+		}
+		)
 		$("#btn_addpipe1").click(function () { 
 			if (!DCI.Plot.isload)
 				DCI.Plot.Init(DCI.map2dTool.map);
@@ -234,7 +242,8 @@ LayerContorl = DObject({
 			var day = (Array(2).join(0) + (new Date().getDate()-1).toString()).slice(-2);
 			var minute = (Array(2).join(0) + new Date().getMinutes().toString()).slice(-2);
 			var hour = (Array(2).join(0) + new Date().getHours().toString()).slice(-2);
-			var req_date = {date:new Date().getFullYear().toString()+month+day,time:hour+minute}
+			
+			var req_date = {date:new Date().getFullYear().toString()+month+day,time:hour+minute,type:bt_type.value,flux_value1:value1.value,flux_value2:value2.value}
 			$.ajax({
 				type: "POST",
 				url: "http://192.168.1.21:5001/info/",
@@ -261,7 +270,7 @@ LayerContorl = DObject({
 			var day = history_time.value.substr(8,2);
 			var hour = history_time.value.substr(11,2);
 			var minute = history_time.value.substr(14,2);		
-			var req_date = {date:year+month+day,time:hour+minute}
+			var req_date = {date:year+month+day,time:hour+minute,type:bt_type.value,flux_value1:value1.value,flux_value2:value2.value}
 			$.ajax({
 				type: "POST",
 				url: "http://192.168.1.21:5001/info/",
@@ -271,8 +280,10 @@ LayerContorl = DObject({
 					alert("success");
 					if(response.date == "OK"){
 						$('#bt_trafficCtrl2').css('background', 'url(./Content/images/index/refresh.png) no-repeat');
-						var curLyr = DCI.Catalog.map.getLayer("layer11");
+						var curLyr = DCI.Catalog.map.getLayer("layer7");
+						var curLyr1 = DCI.Catalog.map.getLayer("layer8");
 						curLyr.refresh();
+						curLyr1.refresh();
 					}
 				},
 				error: function(response){

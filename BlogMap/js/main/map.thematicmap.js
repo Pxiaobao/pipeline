@@ -64,6 +64,14 @@ DCI.thematicmap = {
              '<input type="checkbox" name="flowLayer" id="flowLayer1" value="0"  style="width: 15px;height: 15px;vertical-align: middle;margin: auto;"/>' +
              '<label style="font-weight: normal;vertical-align: middle;margin: auto;">燃气流向图</label>' +
         '</div>' +
+        //200kpa管道流向图
+        "<div style='height:25px;background:#30A4D5;margin-top:10px;width: 98%;margin-left: 3px;float: left;'>" +
+        "<span style='margin-left:5px;font-size: 13px;color:white;'>宝山区域</span>" +
+        "</div>" +
+        '<div id="flowLayer_bs" style="padding:5px;float: left;">' +
+        '<input type="checkbox" name="flowLayer_bs" id="flowLayer1_bs" value="0"  style="width: 15px;height: 15px;vertical-align: middle;margin: auto;"/>' +
+        '<label style="font-weight: normal;vertical-align: middle;margin: auto;">宝山区域</label>' +
+        '</div>' +
         //拥堵图
         "<div style='height:25px;background:#30A4D5;margin-top:10px;width: 98%;margin-left: 3px;float: left;'>" +
             "<span style='margin-left:5px;font-size: 13px;color:white;'>管道压力图</span>" +
@@ -116,7 +124,7 @@ DCI.thematicmap = {
         //加载插值图,压力图
         DCI.interPolate.Init(map);
         //dl加载统计图
-        //DCI.chart.Init(map);
+        DCI.flow_bs.Init(map);
         //迁徙图
         DCI.predict.Init(map);
     },
@@ -129,19 +137,12 @@ DCI.thematicmap = {
             DCI.heatmap.heatLayer2.hide();
         }
         $("[name = heatmapFeatureLayer]:radio").attr("checked", false);
-       /*dl  //统计图
-        if (DCI.cluster.map.getLayer("chart"))
-            DCI.cluster.map.getLayer("chart").hide();
-        //删掉echarts统计图
-        $(".myInfoWindow").remove();
-        $("[name = chartlayer]:radio").attr("checked", false);
-        //dl聚合图
-        if (DCI.cluster.map.getLayer("clusters"))
-            DCI.cluster.map.getLayer("clusters").hide();
-        $("[name = clusterlayer]:checkbox").attr("checked", false); */
+       
         //流向图
         $("[name = flowlayer]:checkbox").attr("checked", false);
         $("#moveecharts_Map").remove();
+        //200流向
+        $("[name = flowlayer_bs]:checkbox").attr("checked", false);
         //插值图
         //$("[name = interpolatelayer]:checkbox").attr("checked", false);
         //$("#inter_Map").remove(); 

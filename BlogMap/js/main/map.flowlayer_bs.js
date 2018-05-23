@@ -1,21 +1,117 @@
 if (typeof DCI == "undefined") { var DCI = {}; }
-DCI.flow = {        
+DCI.flow_bs = {        
     map: null,
+    option1: {},
         //模块初始化函数
         Init:function(map){
-            DCI.flow.map = map;
-            
+            DCI.flow_bs.map = map;
+            $.getJSON("js/main/busline.json", "", function(data) {
+                if(typeof(data)=="string"){
+                data=JSON.parse(data);
+                }     
+            var busLines1 = DCI.flow_bs.getbusLines(data, true);                        //带特效系列的公交线路图层设置
+            DCI.flow_bs.option1 = {
+                geo: {},//地理坐标系组件，不可删除，设置为空即可
+                series: [{//系列列表，每个系列通过 type 决定自己的图表类型
+                    type: 'lines',//线图，用于带有起点和终点信息的线数据的绘制，主要用于地图上的航线，路线的可视
+                    polyline: true,//是否是多段线，true表示是
+                    data: busLines1,//线数据集
+                    silent: true,//图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件，true为不响应和触发鼠标事件
+                    lineStyle: {//线的样式
+                        normal: {
+                            color: '#c23531',//线的颜色
+                            opacity: 0.2,//不透明度，范围是0-1，数值越小越透明
+                            width: 1//线宽
+                        }
+                    },
+                    progressiveThreshold: 500,//启用渐进式渲染的图形数量阈值，在单个系列的图形数量超过该阈值时启用渐进式渲染。
+                    progressive: 200//渐进式渲染时每一帧绘制图形数量，设为 0 时不启用渐进式渲染，支持每个系列单独配置。
+                }, {
+                    type: 'lines',//线图，用于带有起点和终点信息的线数据的绘制，主要用于地图上的航线，路线的可视
+                    polyline: true,//是否是多段线，true表示是
+                    data: busLines1,//线数据集
+                    lineStyle: {//线的样式
+                        normal: {
+                            width: 0//线宽
+                        }
+                    },
+                    effect: {//线特效的配置
+                        constantSpeed: 20,//配置特效图形的移动动画是否是固定速度，单位像素/秒，设置为大于 0 的值后会忽略 period 配置项
+                        show: true,//是否显示特效
+                        trailLength: 0.1,//特效尾迹的长度。取从 0 到 1 的值，数值越大尾迹越长
+                        symbolSize: 1.5//特效标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示高和宽，例如 [20, 10] 表示标记宽为20，高为10
+                    },
+                    zlevel: 1//线图所有图形的 zlevel 值，zlevel 大的 Canvas 会放在 zlevel 小的 Canvas 的上面
+                }]
+            };
+            //DCI.flow_bs.loadFlowEchartsMap(DCI.flow_bs.map);
+        });
             //监听check点击事件
-            $("#flowLayer input").bind("click", function () {
+            $("#flowLayer_bs input").bind("click", function () {
+                
                 //if ($(this).attr("checked")) {
                     if (this.checked) {
-                        DCI.flow.loadFlowEchartsMap(DCI.flow.map);
+                        
+
+                        var chartlayer = 'chartLayer';
+                        DCI.flow_bs.addEchartsLayerByOption(chartlayer, DCI.flow_bs.option1, function () {//根据option的json进行渲染，第一个参数是图层名字，第二个参数是传入图层设置的json，第三个参数是回调函数，返回添加的图层
+                        });
                     }
                     else {
                         $("#moveecharts_Map").remove();
                     }
             })
         },
+           //处理公交线路数据，获得坐标系和线路的颜色
+     getbusLines: function(data, islineStyle) {
+        var hStep = 300 / (data.length - 1);
+        return busLines = [].concat.apply([], data.map(function (busLine, idx) {
+            var prevPt = 0;
+            var points = [];
+            for (var i = 0; i < busLine.length; i += 2) {
+                var pt = [busLine[i], busLine[i + 1]];
+                if (i > 0) {
+                    pt = [
+                        prevPt[0] + pt[0],
+                        prevPt[1] + pt[1]
+                    ];
+                }
+                prevPt = pt;
+
+                points.push([pt[0] / 1e4, pt[1] / 1e4]);
+            }
+            if (islineStyle) {
+
+                return {
+                    coords: points,
+                    lineStyle: {//设置每个数据列的颜色
+                        normal: {
+                            color:'#c23531'
+                            //color: echarts.color.modifyHSL('#5A94DF', Math.round(hStep * idx))
+                        }
+                    }
+                };
+            }
+            return {
+                coords: points
+            };
+        }));
+    },
+        addEchartsLayerByOption: function(layerName, option, callback, isOld) {
+            
+                require(["moveEchartsMap/Echarts3Layer", "moveEchartsMap/echarts"], function (Echarts3Layer, echarts) {
+                   // removeEchartsLayer(layerName, isOld);
+                    var overlay = new Echarts3Layer(DCI.map2dTool.map, echarts, layerName, isOld);
+                    if (!window.echartsLayerInstance)
+                        window.echartsLayerInstance = [];
+                    window.echartsLayerInstance.push(overlay);
+                    var chartsContainer = overlay.getEchartsContainer();
+                    var myChart = overlay.initECharts(chartsContainer);
+                    // 使用刚指定的配置项和数据显示图表。
+                    overlay.setOption(option);
+                    callback(overlay);
+                })
+            },
         loadFlowEchartsMap: function (map) {
 
               var overlay = new moveEchartsMap.EchartsLayer(map, echarts);
@@ -34,6 +130,14 @@ DCI.flow = {
            
                        var option = {
                            color: ['gold','aqua','lime'],
+ /*                           title : {
+                              text: '管网流向图ARCGIS版',
+                                           subtext: '-- ',
+                               x:'center',
+                               textStyle : {
+                                   color: '#fff'
+                               }
+                           }, */
                            series : [
                                {                      
                                    type: 'map',
@@ -969,9 +1073,40 @@ DCI.flow = {
                                            color: '#fff',
                                            shadowBlur: 10
                                        },
+                                      /*  itemStyle : {
+                                           normal: {
+                                               borderWidth:1,
+                                               lineStyle: {
+                                                   type: 'solid',
+                                                   shadowBlur: 10
+                                               }
+                                           }
+                                       }, */
                                        data : jsontree
                                    },
                                    
+                                 /*   markPoint : {
+                                       symbol:'emptyCircle',
+                                       symbolSize : function (v){
+                                           return 1 + v/10
+                                       },
+                                       effect : {
+                                           show: false,
+                                           shadowBlur : 0
+                                       },
+                                       itemStyle:{
+                                           normal:{
+                                               label:{show:false}
+                                           },
+                                           emphasis: {
+                                               label:{position:'top'}
+                                           }
+                                       },
+                                       data : [
+                                       //    {name:'11',value:80}                         
+                                       ]
+                                   }
+                                    */
                                },
                               
                            ]
