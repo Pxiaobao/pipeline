@@ -147,7 +147,7 @@ DCI.interPolate = {
 
         if (i <= freq) {
             DCI.interPolate.addImageLayer('layer', MapConfig.pipepngUrl + y + '/' + m + '/' + d + '/' + DCI.interPolate.times[i] + '/KPA/KPA.png',
-                -34094.0786696, 4642.90213197, -9329.02913947, 23216.6892795, 2379, 1, i);
+            -31530.9161542535, 2722.90523641796, 1489.14988587857, 27487.954766517, 2379, 1, i);
             i++;
             setTimeout(DCI.interPolate.loops, 1000)
 
@@ -163,7 +163,7 @@ DCI.interPolate = {
 
         if (i <= freq) {
             DCI.interPolate.addImageLayer('layer', MapConfig.pipepngUrl + y + '/' + m + '/' + d + '/' + DCI.interPolate.times[i] + '/KPA/KPA.png',
-                -34094.0786696, 4642.90213197, -9329.02913947, 23216.6892795, 2379, 1, i);
+            -31530.9161542535, 2722.90523641796, 1489.14988587857, 27487.954766517, 2379, 1, i);
 
         }
         else {

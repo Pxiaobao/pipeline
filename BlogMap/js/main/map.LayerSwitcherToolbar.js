@@ -157,14 +157,15 @@ LayerContorl = DObject({
 		'<div><span class="update_lbl">更新时间:</span>'+
 		'<span id="time_trafficCtrl" class="update_lbl">--:--</span>'+
 		'<span id="bt_trafficCtrl" class="update" title="更新"></span></div>'+
-		'<div><input id="bt_type" value="flux" type="button"/><input style="width:60px" id="value1"/><input style="width:60px" id="value2"/></div>'+
+		'<div><input id="bt_type" value="press" type="button"/><input style="width:60px" value="20" id="value1"/></div>'+
 	'</div>'+
 	'<div class="mappop_hidden" id="tabC2">'+
 		'<div><input id="history_time" class="update_time" type="datetime-local" value="2018-02-24T01:00:00"/>'+
 		'<div id="bt_trafficCtrl2" class="update" title="更新"></div></div>'+
 	'</div>'+
 	'<div class="mappop_hidden" id="tabC3">'+
-		'<input type="button" id="btn_addpipe1" value="选择管道位置" class="btn_add"></input>'+
+		'<input type="button" style="float:left" id="btn_addpipe1" value="选择管道位置" class="btn_add"></input>'+
+		'<div id="bt_trafficCtrl3" class="update" title="更新"></div></div>'+
 	'</div>';
 		pDiv.appendChild(mappop);
 		$("#bt_type").click(function(){
@@ -243,21 +244,22 @@ LayerContorl = DObject({
 			var minute = (Array(2).join(0) + new Date().getMinutes().toString()).slice(-2);
 			var hour = (Array(2).join(0) + new Date().getHours().toString()).slice(-2);
 			
-			var req_date = {date:new Date().getFullYear().toString()+month+day,time:hour+minute,type:bt_type.value,flux_value1:value1.value,flux_value2:value2.value}
+			var req_date = {date:new Date().getFullYear().toString()+month+day,time:hour+minute,type:bt_type.value,flux_value1:value1.value,flux_value2:100}
 			$.ajax({
 				type: "POST",
 				url: "http://192.168.1.21:5001/info/",
 				data: req_date,
 				dataType: "JSON",
 				success: function (response) {
-					alert("success");
+					//alert("success");
 					if(response.date == "OK"){
 						$('#bt_trafficCtrl').css('background', 'url(./Content/images/index/refresh.png) no-repeat');
 						$('#time_trafficCtrl').html(hour+":"+minute);
 					}
 				},
 				error: function(response){
-					alert("error")
+					alert("所选时间无数据，请选择其他时间")
+					$('#bt_trafficCtrl1').css('background', 'url(./Content/images/index/refresh.png) no-repeat');
 				}
 			});
 			
@@ -269,15 +271,23 @@ LayerContorl = DObject({
 			var month = history_time.value.substr(5,2);
 			var day = history_time.value.substr(8,2);
 			var hour = history_time.value.substr(11,2);
-			var minute = history_time.value.substr(14,2);		
-			var req_date = {date:year+month+day,time:hour+minute,type:bt_type.value,flux_value1:value1.value,flux_value2:value2.value}
+			var minute = history_time.value.substr(14,2);
+			var req_date;
+			var url;
+			if(history_time.value >= new Date()){
+				req_date = {date:year+month+day,time:hour+minute};
+				url = "http://192.168.1.21:5001/predict/";
+			}else{
+				req_date = {date:year+month+day,time:hour+minute,type:bt_type.value,flux_value1:value1.value,flux_value2:100}
+				url = "http://192.168.1.21:5001/info/";
+			}	
 			$.ajax({
 				type: "POST",
-				url: "http://192.168.1.21:5001/info/",
+				url: url,
 				data: req_date,
 				dataType: "JSON",
 				success: function (response) {
-					alert("success");
+					//alert("success");
 					if(response.date == "OK"){
 						$('#bt_trafficCtrl2').css('background', 'url(./Content/images/index/refresh.png) no-repeat');
 						var curLyr = DCI.Catalog.map.getLayer("layer7");
@@ -287,7 +297,8 @@ LayerContorl = DObject({
 					}
 				},
 				error: function(response){
-					alert("error")
+					alert("所选时间无数据，请选择其他时间")
+					$('#bt_trafficCtrl2').css('background', 'url(./Content/images/index/refresh.png) no-repeat');
 				}
 			}); 
 			
